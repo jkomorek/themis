@@ -1,0 +1,7 @@
+[
+{ "conferenceTitle" : "The 2011 Black Hat Conference", "conferenceKey" : "conkey1", "isModerator" : false, "isOrganizer" : false, "isSpeaker" : false },
+{ "conferenceTitle" : "The 2012 Black Hat Conference", "conferenceKey" : "conkey1", "isModerator" : true, "isOrganizer" : false, "isSpeaker" : false },
+{ "conferenceTitle" : "The 2013 Black Hat Conference", "conferenceKey" : "conkey1", "isModerator" : false, "isOrganizer" : false, "isSpeaker" : true },
+{ "conferenceTitle" : "Log4j Conference", "conferenceKey" : "conkey1", "isModerator" : true, "isOrganizer" : true, "isSpeaker" : false },
+{ "conferenceTitle" : "A Really Long Title for a Really Cool Conference", "conferenceKey" : "conkey1", "isModerator" : true, "isOrganizer" : true, "isSpeaker" : true }
+]

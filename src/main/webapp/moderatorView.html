@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Themis - Moderator View</title>
+
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+
+ 	<link type="text/css" href="jquery/css/start/jquery-ui-1.8.16.custom.css" rel="stylesheet" />
+	<script type="text/javascript" src="jquery/js/jquery-1.6.2.min.js"></script>
+	<script type="text/javascript" src="jquery/js/jquery-ui-1.8.16.custom.min.js"></script>
+
+    <script type="text/javascript" src="js/com/geocent/themis/ajax/SessionManagement.js"></script>
+    <script type="text/javascript" src="js/com/geocent/themis/ajax/QuestionManagement.js"></script>
+
+
+    <script type="text/javascript">
+        $( function() {
+
+            // Initialize accordion
+            $( "#accordion" ).accordion({
+                autoHeight: false,
+                navigation: true
+            });
+
+            // Retrieve current user name and add it to HTML page as necessary.
+            var userName = getMyUserName();
+            if (userName) {
+                $("#userName").html(userName);
+            } else {
+                $("#userName").html("[unknown user]");
+            }
+
+            // Initialize logoutButton
+            $("#logoutButton").button().click(function() {
+                var errorMessage = logout();
+
+                if( errorMessage ) alert(errorMessage);
+                else window.location.href = "index.html";
+            });
+
+            // Build list of questions
+            var questionListDiv = $("#questionListDiv");
+            var questions = listUnModeratedQuestions();
+            for (i in questions) {
+                questionListDiv.append(
+                        "<div class='questionDiv'>"
+                        +"<div class='questionText'>"+questions[i]+"</div>"
+                        +"<button class='denyQuestionButton' \>"
+                        +"<button class='approveQuestionButton' \>"
+                        +"</div>");
+            }
+
+            // Initialize Deny Question Buttons
+            $(".denyQuestionButton").button({
+                icons: {
+                    primary: "ui-icon-cancel"
+                }
+            });
+
+            // Initialize Approve Question Buttons
+            $(".approveQuestionButton").button({
+                icons: {
+                    primary: "ui-icon-check"
+                }
+            });
+
+            // Initialize Refresh Button
+            $("#refreshButton").button().click(function() {
+                location.reload();
+            });
+
+        });
+
+    </script>
+
+    <style type="text/css">
+        #headerText {
+            float: left;
+            font-size: 1.1em;
+            text-align: center;
+            padding: 0.4em 1em;
+        }
+
+        #contentDIV h1 { margin: 0; padding: 0.4em; text-align: center; }
+
+        #contentDIV h2 { margin: 0; padding: 0.4em; text-align: center; }
+
+        /* Line up input boxes next to labels */
+        label {
+            float:left;
+            display:inline;
+            width:150px;
+        }
+
+        .questionDiv {
+            height: 50px;
+            padding-bottom: 20px;
+        }
+
+        .approveQuestionButton {
+            padding-left: 20px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            margin-right: 20px;
+            float: right;
+        }
+
+        .denyQuestionButton {
+            padding-left: 20px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            margin-left: 20px;
+            float: right;
+        }
+
+        .questionText {
+            float: left;
+        }
+
+
+    </style>
+
+
+</head>
+<body>
+
+<div id="contentDIV" class="ui-widget-content ui-corner-all" style="margin-left:auto;margin-right:auto;max-width: 800px">
+
+        <h1 class="ui-widget-header ui-corner-all">
+                <div id="headerText">
+                    Welcome, <span id="userName"></span>
+                </div>
+                <div align="right" id="logoutButtonDiv">
+                    <a class="ui-widget-header" id="logoutButton" href="#">Logout</a>
+                </div>
+
+        </h1>
+
+    <br/>
+
+    <h2>
+        The questions below have not yet been approved or denied.
+    </h2>
+
+    <br/><br/>
+
+
+    <div id="accordion">
+        <h3><a href="#">Moderate Questions</a></h3>
+
+        <div id="questionsDiv" class="ui-widget  ui-corner-all">
+            <div id="questionListDiv">
+            </div>
+            <br/><br/><br/>
+            <a id="refreshButton" href="">Refresh Questions</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
